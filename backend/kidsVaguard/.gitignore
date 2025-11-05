@@ -1,0 +1,49 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+
+# Firebase Service Account Key
+# src/main/resources/firebase/ 폴더 아래의 모든 .json 파일을 무시합니다.
+src/main/resources/firebase/*.json
+
+# 만약 파일 이름이 고정되어 있다면 아래처럼 특정 파일만 지정해도 됩니다.
+# src/main/resources/firebase/kidsvaguard-firebase-adminsdk-31bb6e5932.json
+
+# 만약 src/main/resources 바로 아래에 두었다면:
+# kidsvaguard-firebase-adminsdk-31bb6e5932.json
+# 또는 *.json (단, 다른 중요한 json 파일까지 무시할 수 있으니 주의)

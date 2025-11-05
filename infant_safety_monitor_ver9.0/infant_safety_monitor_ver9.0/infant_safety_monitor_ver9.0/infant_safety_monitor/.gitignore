@@ -1,0 +1,14 @@
+# Temporary image files
+temp_images/
+
+# Python virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# IDE specific files
+.idea/
+.vscode/
+
+# dotenv file
+.env

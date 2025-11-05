@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 가입</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <style>
+        .gradient-custom {
+            background: linear-gradient(to right, rgba(254, 238, 229, 1), rgba(229, 193, 197, 1));
+        }
+    </style>
+</head>
+<body class="gradient-custom">
+<section class="d-flex vh-100">
+    <div class="container-fluid row justify-content-center align-content-center">
+        <div class="card bg-dark" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+                <h2 class="text-white">SIGN UP</h2>
+                <p class="text-white-50 mt-2 mb-5">서비스 사용을 위한 회원 가입</p>
+
+                <form id="signupForm" method="POST" th:action="@{/users/sign-up}" onsubmit="return validateForm();">
+                    <div class="mb-3">
+                        <label class="form-label text-white">User ID</label>
+                        <input type="text" class="form-control" id="userId" name="userId" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-white">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                        <small id="passwordError" class="form-text text-danger" style="display:none;">8~30자 사이로 입력하세요.</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-white">Username</label>
+                        <input type="text" class="form-control" id="username" name="username">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-white">Email</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                        <small id="emailError" class="form-text text-danger" style="display:none;">올바른 이메일 형식을 입력하세요.</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-white">Phone</label>
+                        <input type="text" class="form-control" id="phone" name="phone">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">회원가입</button>
+                    <button type="button" class="btn btn-secondary mt-2" onclick="location.href='/login'">로그인</button>
+                </form>
+
+                <!-- 팝업 모달 -->
+                <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="errorModalLabel">입력 오류</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="errorMessage"></div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function validateForm() {
+        let email = document.getElementById('email').value;
+        let password = document.getElementById('password').value;
+        let emailError = document.getElementById('emailError');
+        let passwordError = document.getElementById('passwordError');
+        let valid = true;
+
+        if (!validateEmail(email)) {
+            emailError.style.display = 'block';
+            valid = false;
+        } else {
+            emailError.style.display = 'none';
+        }
+
+        if (password.length < 8 || password.length > 30) {
+            passwordError.style.display = 'block';
+            valid = false;
+        } else {
+            passwordError.style.display = 'none';
+        }
+
+        if (!valid) {
+            showErrorMessage("입력된 정보를 다시 확인해주세요.");
+        }
+
+        return valid;
+    }
+
+    function validateEmail(email) {
+        const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    function showErrorMessage(message) {
+        document.getElementById('errorMessage').textContent = message;
+        const modal = new bootstrap.Modal(document.getElementById('errorModal'));
+        modal.show();
+    }
+</script>
+</body>
+</html>
+s
